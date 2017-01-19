@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pz_api',
+    'proyecto_zero_api.bankaccounts'
 ]
 
 MIDDLEWARE = [
