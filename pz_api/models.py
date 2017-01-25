@@ -9,6 +9,7 @@ class BankAccount(models.Model):
     Info about a bank account.
 
     :param uuid id: UUID
+    :param User user: user
     :param str name: name.
     :param str description: description.
     :param decimal balance: balance.
@@ -35,16 +36,16 @@ class Category(models.Model):
     Info about a category.
 
     :param uuid id: UUID.
-    :param int user_id: id of user.
-    :param int parent_id: id of parent category.
+    :param User user: user.
+    :param Category parent: parent category.
     :param str name: name.
     :param URLField icon: icon path.
     :param binary type: type of category (input/output).
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    parent_id = models.ForeignKey('Category', on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    parent = models.ForeignKey('Category', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     icon = models.URLField()
     type = models.BinaryField()
@@ -58,16 +59,16 @@ class Transaction(models.Model):
     Info about a transaction.
 
     :param uuid id: UUID.
-    :param BankAccount bank_account_id: id of bank account.
-    :param Category category_id: id of category.
+    :param BankAccount bank_account: id of bank account.
+    :param Category category: category.
     :param decimal amount: amount.
     :param date created_at: date of creation.
     :param date updated_at: date of the last update.
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    bank_account_id = models.ForeignKey(BankAccount, on_delete=models.CASCADE)
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    bank_account = models.ForeignKey(BankAccount, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.CharField(max_length=255)
     date = models.DateTimeField()
     amount = models.DecimalField(max_digits=12, decimal_places=2)

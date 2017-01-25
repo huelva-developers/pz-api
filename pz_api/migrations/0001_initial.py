@@ -36,8 +36,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255)),
                 ('icon', models.URLField()),
                 ('type', models.BinaryField()),
-                ('parent_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='pz_api.Category')),
-                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('parent', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='pz_api.Category')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
@@ -49,8 +49,8 @@ class Migration(migrations.Migration):
                 ('amount', models.DecimalField(decimal_places=2, max_digits=12)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('bank_account_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pz_api.BankAccount')),
-                ('category_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pz_api.Category')),
+                ('bank_account', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pz_api.BankAccount')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pz_api.Category')),
             ],
         ),
     ]
